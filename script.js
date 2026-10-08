@@ -1,340 +1,127 @@
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const heading = document.querySelector("h1");
+const paragraph = document.querySelector("p");
 
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+const dateSection = document.getElementById("dateSection");
+const datePicker = document.getElementById("datePicker");
+const confirmDate = document.getElementById("confirmDate");
 
-    font-family: Arial, sans-serif;
+// Don't allow dates in the past
+const today = new Date().toISOString().split("T")[0];
+datePicker.min = today;
 
-    background: linear-gradient(
-        135deg,
-        #ffe6f0,
-        #f3e7ff
+
+// YES button
+yesBtn.addEventListener("click", function () {
+
+    heading.textContent = "YAY! 🍦❤️";
+
+    paragraph.textContent =
+        "I can't wait to take you out for ice cream!";
+
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+
+    // Show date selection
+    dateSection.style.display = "block";
+});
+
+
+// NO button runs away
+noBtn.addEventListener("mouseover", function () {
+
+    const x = Math.random() *
+        (window.innerWidth - noBtn.offsetWidth);
+
+    const y = Math.random() *
+        (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+
+// Confirm date
+confirmDate.addEventListener("click", function () {
+
+    if (datePicker.value === "") {
+
+        alert("Please choose a date first! 🍦💕");
+        return;
+    }
+
+    const chosenDate = new Date(datePicker.value);
+
+    const formattedDate = chosenDate.toLocaleDateString(
+        "en-ZA",
+        {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
     );
 
-    padding: 20px;
-}
+    // Final celebration screen
+    // Your WhatsApp number
+    // Use country code WITHOUT the + sign
+    const yourWhatsAppNumber = "270783200328";
 
-.container {
-    width: 100%;
-    max-width: 420px;
 
-    background: white;
+        // Final celebration screen
+    dateSection.innerHTML = `
 
-    padding: 40px 25px;
+        <div class="celebration">
 
-    border-radius: 30px;
+            <div class="celebration-emojis">
+            🍦 💕 🍨 💗 🍧
+            </div>
 
-    text-align: center;
+            <h2>🎉 IT'S A DATE! 🎉</h2>
 
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.12);
-}
+            <p class="date-message">
+                You just made me very happy! ❤️
+            </p>
 
-.ice-cream {
-    font-size: 50px;
-    margin-bottom: 15px;
-    letter-spacing: 8px;
-}
+            <div class="date-card">
 
-.question {
-    animation: gentleBounce 2s ease-in-out infinite;
-}
+                <p>🍦 Our Ice-Cream Date 🍦</p>
 
-@keyframes gentleBounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
+                <h3>📅 ${formattedDate}</h3>
 
-    50% {
-        transform: translateY(-4px);
-    }
-}
+                <p>Get ready for something sweet! 🥰</p>
 
-p {
-    color: #777;
+            </div>
 
-    font-size: 16px;
+            <div class="hearts">
+            ❤️ 💕 ❤️ 💕 ❤️
+            </div>
 
-    margin-bottom: 30px;
-}
+            <button id="sendWhatsApp">
+                💬 Send my answer ❤️
+            </button>
 
-.buttons {
-    display: flex;
-
-    justify-content: center;
+            <p class="final-message">
+                I can't wait to see you! 🍦🥰❤️
+            </p>
 
-    gap: 15px;
-}
-
-button {
-    border: none;
-
-    padding: 15px 28px;
-
-    border-radius: 50px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-#yesBtn {
-    background: #111;
-
-    color: white;
-}
-
-#noBtn {
-    background: #eeeeee;
-
-    color: #333;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-.question {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff4f9a;
-    margin-bottom: 10px;
-}
-
-h1 {
-    color: #7b2cbf;
-    font-size: 32px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-.buttons button {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#yesBtn {
-    background: #ff69b4;
-    color: white;
-}
-
-#noBtn {
-    background: #ddd;
-    color: #555;
-}
-
-/* Date selection section */
-#dateSection {
-    margin-top: 25px;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 25px rgba(123, 44, 191, 0.15);
-    animation: fadeIn 0.6s ease;
-}
-
-#dateSection h2 {
-    color: #ff4f9a;
-    font-size: 26px;
-    margin-bottom: 12px;
-}
-
-#dateSection p {
-    color: #7b2cbf;
-    font-size: 17px;
-    font-weight: 500;
-}
-
-#dateSection label {
-    display: block;
-    color: #ff4f9a;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 15px 0 8px;
-}
-
-/* Date picker */
-#datePicker {
-    padding: 12px 15px;
-    border: 2px solid #ffb3d9;
-    border-radius: 12px;
-    background: white;
-    color: #7b2cbf;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    outline: none;
-}
-
-#datePicker:focus {
-    border-color: #ff69b4;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.25);
-}
-
-/* Confirm button */
-#confirmDate {
-    padding: 13px 25px;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #ff69b4, #c77dff);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(199, 125, 255, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#confirmDate:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(199, 125, 255, 0.4);
-}
-
-/* Smooth appearance */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================= */
-/* FINAL DATE CELEBRATION */
-/* ============================= */
-
-.celebration {
-    text-align: center;
-    animation: celebrationAppear 0.8s ease;
-}
-
-.celebration-emojis {
-    font-size: 38px;
-    letter-spacing: 5px;
-    margin-bottom: 10px;
-    animation: floatingIceCream 2s ease-in-out infinite;
-}
-
-.celebration h2 {
-    color: #ff4f9a;
-    font-size: 32px;
-    margin: 10px 0;
-}
-
-.date-message {
-    color: #7b2cbf;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.date-card {
-    padding: 20px;
-    margin: 15px auto;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.75);
-    border: 2px solid rgba(255, 105, 180, 0.25);
-    box-shadow: 0 8px 25px rgba(123, 44, 191, 0.15);
-}
-
-.date-card p:first-child {
-    color: #ff4f9a;
-    font-size: 19px;
-    font-weight: bold;
-}
-
-.date-card h3 {
-    color: #7b2cbf;
-    font-size: 22px;
-    margin: 12px 0;
-}
-
-.date-card p:last-child {
-    color: #555;
-    font-size: 16px;
-}
-
-.hearts {
-    font-size: 25px;
-    margin: 18px 0;
-    animation: heartBeat 1.5s ease-in-out infinite;
-}
-
-.final-message {
-    color: #ff4f9a;
-    font-size: 19px;
-    font-weight: bold;
-}
-
-
-/* Celebration entrance */
-@keyframes celebrationAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
-
-
-/* Floating ice creams */
-@keyframes floatingIceCream {
-
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-}
-
-
-/* Heart animation */
-@keyframes heartBeat {
-
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.12);
-    }
-
-    #sendWhatsApp {
-        padding: 14px 25px;
-        border: none;
-        border-radius: 25px;
-        background: #25D366;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #sendWhatsApp:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-    }
-}
+        </div>
+    `;
+   
+    const sendWhatsApp = document.getElementById("sendWhatsApp");
+
+    sendWhatsApp.addEventListener("click", function () {
+
+        const whatsappMessage =
+            `🍦❤️ It's a date!\n\n` +
+            `I chose ${formattedDate} for our ice-cream date. 🥰🍨\n\n` +
+            `I can't wait! ❤️`;
+
+        const whatsappURL =
+            `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+        window.location.href = whatsappURL;
+    });
+});
