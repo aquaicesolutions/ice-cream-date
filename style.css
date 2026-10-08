@@ -320,4 +320,21 @@ h1 {
         transform: scale(1.12);
     }
 
+    #sendWhatsApp {
+        padding: 14px 25px;
+        border: none;
+        border-radius: 25px;
+        background: #25D366;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #sendWhatsApp:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
 }
